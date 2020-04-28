@@ -38,7 +38,6 @@ class UI(val board: Board) {
                             "\" class=\"content  "+ animation+"\">" +
                             ""+cell.getPrintable() +"</div>" +
                             "</td>";
-
             }
             innerHTML += "</tr>"
         }

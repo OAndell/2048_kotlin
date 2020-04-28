@@ -51,6 +51,7 @@ class Board(size:Int) {
         }
         val randomIndex = (Math.random() * ((emptyCells.size) - 1) + 1).toInt()
         emptyCells.get(randomIndex).tile = Tile();
+        emptyCells.get(randomIndex).tile!!.animation = Tile.ANIMATION_POPIN;
     }
 
     private fun moveEast(){
@@ -58,6 +59,7 @@ class Board(size:Int) {
             var stack = ArrayList<Tile>();
             for(x in board.size-1 downTo 0) {
                 if(board[y][x].tile != null){
+                    board[y][x].tile!!.animation = Tile.ANIMATION_EAST;
                     stack.add(board[y][x].tile!!)
                     board[y][x].tile = null
                 }
@@ -88,6 +90,7 @@ class Board(size:Int) {
             var stack = ArrayList<Tile>();
             for(x in 0 until board.size){
                 if(board[y][x].tile != null){
+                    board[y][x].tile!!.animation = Tile.ANIMATION_WEST;
                     stack.add(board[y][x].tile!!)
                     board[y][x].tile = null
                 }
@@ -118,6 +121,7 @@ class Board(size:Int) {
             var stack = ArrayList<Tile>();
             for(y in board.size-1 downTo 0){
                 if(board[y][x].tile != null){
+                    board[y][x].tile!!.animation = Tile.ANIMATION_SOUTH;
                     stack.add(board[y][x].tile!!)
                     board[y][x].tile = null
                 }
@@ -148,6 +152,7 @@ class Board(size:Int) {
             var stack = ArrayList<Tile>();
             for(y in 0 until board.size){
                 if(board[y][x].tile != null){
+                    board[y][x].tile!!.animation = Tile.ANIMATION_NORTH;
                     stack.add(board[y][x].tile!!)
                     board[y][x].tile = null
                 }

@@ -5,7 +5,6 @@ body{
     padding: 10px;
 }
 
-
 table {
     width: 500px;
 }
@@ -20,10 +19,64 @@ td:after {
 td .content {
     position: absolute;
     top: 0;
-    padding: 45%;
+    padding: 30%;
     text-align: center;
     bottom: 0;
     left: 0;
     right: 0;
     background: white;
+    font-size: 50px;
+    text-shadow: white 0px 0px 5px;
 }
+
+.east{
+    animation: move_east 100ms;
+}
+
+.north{
+    animation: move_north 100ms;
+}
+
+.west{
+    animation: move_west 100ms;
+}
+
+.south{
+    animation: move_south 100ms;
+}
+
+.popin{
+    animation: popin 200ms;
+}
+
+@keyframes move_east {
+    from {left: 0px;}
+    to {left: 5px;}
+}
+
+@keyframes move_north {
+    from {bottom: 0px;}
+    to {bottom: 5px;}
+}
+
+@keyframes move_west {
+    from {right: 0px;}
+    to {right: 5px;}
+}
+
+@keyframes move_south {
+    from {top: 0px;}
+    to {top: 5px;}
+}
+
+
+@keyframes popin {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+

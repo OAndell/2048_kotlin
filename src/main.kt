@@ -12,13 +12,23 @@ fun main(args: Array<String>) {
     document.addEventListener("keydown", { event: Event ->
         if (event is KeyboardEvent) {
             when (event.keyCode) { //WASD
-                87 -> board.move(board.DIRECTION_NORTH)
-                83 -> board.move(board.DIRECTION_SOUTH)
-                68 -> board.move(board.DIRECTION_EAST)
-                65 -> board.move(board.DIRECTION_WEST)
+                87 -> {
+                    board.move(board.DIRECTION_NORTH)
+                    ui.update()
+                }
+                83 -> {
+                    board.move(board.DIRECTION_SOUTH)
+                    ui.update()
+                }
+                68 -> {
+                    board.move(board.DIRECTION_EAST)
+                    ui.update()
+                }
+                65 -> {
+                    board.move(board.DIRECTION_WEST)
+                    ui.update()
+                }
             }
-            ui.update()
-            println(event.keyCode);
         }
     });
 }

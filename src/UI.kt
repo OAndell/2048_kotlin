@@ -1,3 +1,7 @@
+import org.w3c.dom.HTMLDivElement
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.get
 import kotlin.browser.document
 
 class UI(val board: Board) {
@@ -10,15 +14,19 @@ class UI(val board: Board) {
         val ANIMATION_WEST = "west"
         val ANIMATION_EAST = "east"
         val ANIMATION_POPIN = "popin"
-
     }
 
 
     init {
-       update()
+        document.bgColor = "#F5F5F5"
+        update()
     }
 
     fun update(){
+        if(board.hasLost){
+            showLoss();
+            return;
+        }
         var innerHTML= "<table>"
         for (row in board.board){
             innerHTML += "<tr>"
@@ -42,6 +50,16 @@ class UI(val board: Board) {
             innerHTML += "</tr>"
         }
         innerHTML += "</table>";
-        document.body!!.innerHTML = innerHTML;
+        //document.body!!.innerHTML = innerHTML
+        val game = document.getElementById("game") as HTMLDivElement
+        game.innerHTML = innerHTML
+
+    }
+
+    fun showLoss(){
+        val info = document.getElementById("info") as HTMLDivElement
+        info.innerHTML = "<h3> You lost. Refresh page to replay"
+        document.bgColor = "FFAA12"
     }
 }
+

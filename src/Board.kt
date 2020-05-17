@@ -10,6 +10,7 @@ class Board(size:Int) {
 
 
     var board = ArrayList<ArrayList<Cell>>();
+    var hasLost = false;
 
     init{
         for (i in 0 until size){
@@ -47,11 +48,14 @@ class Board(size:Int) {
                     emptyCells.add(cell)
                 }
             }
-
         }
-        val randomIndex = (Math.random() * ((emptyCells.size) - 1) + 1).toInt()
-        emptyCells.get(randomIndex).tile = Tile();
-        emptyCells.get(randomIndex).tile!!.animation = Tile.ANIMATION_POPIN;
+        if(emptyCells.isEmpty()){
+            loseGame()
+        }else{
+            val randomIndex = (Math.random() * ((emptyCells.size) - 1)).toInt()
+            emptyCells.get(randomIndex).tile = Tile();
+            emptyCells.get(randomIndex).tile!!.animation = Tile.ANIMATION_POPIN;
+        }
     }
 
     private fun moveEast(){
@@ -184,6 +188,11 @@ class Board(size:Int) {
             return true;
         }
         return false;
+    }
+
+    private fun loseGame(){
+        hasLost = true;
+        board.clear();
     }
 
 

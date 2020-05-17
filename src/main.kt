@@ -6,8 +6,7 @@ import kotlin.browser.document
 fun main(args: Array<String>) {
     val board = Board(4)
     val ui = UI(board)
-    board.print()
-
+    board.print();
 
     document.addEventListener("keydown", { event: Event ->
         if (event is KeyboardEvent) {

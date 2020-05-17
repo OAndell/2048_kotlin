@@ -1,8 +1,12 @@
 
 
 body{
-    background-color: #2196F3;
     padding: 10px;
+}
+
+#game{
+    border: solid;
+    display: inline-block
 }
 
 table {

@@ -15,6 +15,7 @@ this['2048_kotlinjs'] = function (_, Kotlin) {
     this.DIRECTION_WEST = 'WEST';
     this.DIRECTION_EAST = 'EAST';
     this.board = ArrayList_init();
+    this.hasLost = false;
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
     tmp$ = until(0, size);
     tmp$_0 = tmp$.first;
@@ -61,9 +62,14 @@ this['2048_kotlinjs'] = function (_, Kotlin) {
         }
       }
     }
-    var randomIndex = Math.random() * (emptyCells.size - 1 | 0) + 1 | 0;
-    emptyCells.get_za3lpa$(randomIndex).tile = new Tile();
-    ((tmp$_1 = emptyCells.get_za3lpa$(randomIndex).tile) != null ? tmp$_1 : Kotlin.throwNPE()).animation = Tile$Companion_getInstance().ANIMATION_POPIN;
+    if (emptyCells.isEmpty()) {
+      this.loseGame_0();
+    }
+     else {
+      var randomIndex = Math.random() * (emptyCells.size - 1 | 0) | 0;
+      emptyCells.get_za3lpa$(randomIndex).tile = new Tile();
+      ((tmp$_1 = emptyCells.get_za3lpa$(randomIndex).tile) != null ? tmp$_1 : Kotlin.throwNPE()).animation = Tile$Companion_getInstance().ANIMATION_POPIN;
+    }
   };
   Board.prototype.moveEast_0 = function () {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
@@ -224,6 +230,10 @@ this['2048_kotlinjs'] = function (_, Kotlin) {
     }
     return false;
   };
+  Board.prototype.loseGame_0 = function () {
+    this.hasLost = true;
+    this.board.clear();
+  };
   Board.prototype.print = function () {
     var tmp$, tmp$_0;
     tmp$ = this.board.iterator();
@@ -334,6 +344,7 @@ this['2048_kotlinjs'] = function (_, Kotlin) {
   function UI(board) {
     UI$Companion_getInstance();
     this.board = board;
+    document.bgColor = '#F5F5F5';
     this.update();
   }
   function UI$Companion() {
@@ -359,6 +370,10 @@ this['2048_kotlinjs'] = function (_, Kotlin) {
   }
   UI.prototype.update = function () {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    if (this.board.hasLost) {
+      this.showLoss();
+      return;
+    }
     var innerHTML = '<table>';
     tmp$ = this.board.board.iterator();
     while (tmp$.hasNext()) {
@@ -386,7 +401,14 @@ this['2048_kotlinjs'] = function (_, Kotlin) {
       innerHTML += '<\/tr>';
     }
     innerHTML += '<\/table>';
-    ((tmp$_3 = document.body) != null ? tmp$_3 : Kotlin.throwNPE()).innerHTML = innerHTML;
+    var game = Kotlin.isType(tmp$_3 = document.getElementById('game'), HTMLDivElement) ? tmp$_3 : Kotlin.throwCCE();
+    game.innerHTML = innerHTML;
+  };
+  UI.prototype.showLoss = function () {
+    var tmp$;
+    var info = Kotlin.isType(tmp$ = document.getElementById('info'), HTMLDivElement) ? tmp$ : Kotlin.throwCCE();
+    info.innerHTML = '<h3> You lost. Refresh page to replay';
+    document.bgColor = 'FFAA12';
   };
   UI.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
